@@ -1,0 +1,56 @@
+;; Edini vir podatkov o izdelku. Strežnik (kuhinja.server) ga bere ob vsaki zahtevi,
+;; `bb build` pa ga izvozi v public/data/izdelek.json za statično gostovanje.
+;; Mere so iz modela »Californija kuhinja v7« (Fusion 360). Cene so testne.
+{:ime "Izvlečna kuhinja Cali"
+ :podnaslov "Za VW California T7, pod posteljo, na enem vodilu"
+ :opis "Lahka kuhinja iz topolove vezane plošče, ki se v celoti izvleče pod posteljo skozi zadnja vrata. Na pultu sta dve indukciji, notranjost ima 2 razdelka, 2 predala in drsna vrata na obeh straneh."
+ :osnovna_cena 1890
+ :valuta "EUR"
+
+ :hitre_mere [{:vrednost "38,4 × 84 × 45" :enota "cm" :oznaka "š × d × v"}
+              {:vrednost "~9,7" :enota "kg" :oznaka "ohišje brez okovja"}
+              {:vrednost "2 + 2" :enota "" :oznaka "razdelka in predala"}
+              {:vrednost "100" :enota "cm" :oznaka "vodilo Vevor"}]
+
+ :lastnosti [{:naslov "Izvleče se do konca"
+              :opis "Teče na vodilu Vevor 7601Z dolžine 100 cm. Vodilo sloni na tleh, kuhinja je 5 mm nad tlemi, vrh pulta pa 45,5 cm."}
+             {:naslov "Dve indukciji na pultu"
+              :opis "Pult iz HPL (12 mm) je dovolj velik za dve prenosni indukciji 35 × 28 cm, postavljeni ena zraven druge."}
+             {:naslov "Drsna vrata na obeh straneh"
+              :opis "4 drsna vrata (topol 4 mm in laminat) tečejo v utorih, porezkanih v les. Do vsebine pridete z leve in z desne strani."}
+             {:naslov "Preklopna polička"
+              :opis "Polička 38,4 × 30 cm je na klavirskem tečaju in jo podpira snemljiva palica pod kotom 52°. Ko je ne rabite, palica na magnetih visi na čelu."}
+             {:naslov "Brez vijakov"
+              :opis "Deli so izrezani na CNC in sestavljeni s čepi in utori ter zlepljeni z epoksijem. Vijaki in navojni vložki so samo pri delih, ki se snamejo."}
+             {:naslov "Narejena za ta prostor"
+              :opis "Širina 38,4 cm ustreza 39 cm široki odprtini pod posteljo. Zadaj ostane prostor za Bluetti Elite V2 300."}]
+
+ :razdelki [{:id "lonci" :ime "Lonci" :kje "Sprednji razdelek, na dnu" :mera "svetla višina 35 cm" :nosi "lonci 30 × 30 × 30 cm, 5 kg"}
+            {:id "pribor" :ime "Predal za pribor" :kje "Sprednji razdelek, pod pultom" :mera "7 cm visok" :nosi "pribor za 4 osebe, noži, 2 kg"}
+            {:id "krozniki" :ime "Predal za krožnike" :kje "Zadnji razdelek, pod pultom" :mera "38,3 × 33,4 × 12,5 cm (notranje)" :nosi "krožniki in kozarci, 4 kg"}
+            {:id "zaboj" :ime "Zaboj s hrano" :kje "Zadnji razdelek, na snemljivi polici" :mera "40,5 × 35 × 21 cm prostora" :nosi "zaboj do 20,5 cm višine"}]
+
+ :specifikacije [["Zunanje mere" "38,4 × 84 × 45 cm (z ograjico 51 cm)"]
+                 ["Vrh pulta nad tlemi" "45,5 cm"]
+                 ["Dolžina z odprto poličko" "84 + 31 cm"]
+                 ["Teža ohišja" "~9,7 kg (brez laminata, vodil in okovja)"]
+                 ["Material" "topolova vezana plošča 12 / 10 / 6 mm, kosi na vodilu iz breze 12 mm"]
+                 ["Pult" "HPL, 12 mm"]
+                 ["Površina" "laminat s steklenimi vlakni, dna predalov lakirana (2K PU)"]
+                 ["Vodila" "Vevor 7601Z, 100 cm, 3 sidrišča na stran (2 × M5 v zabijalni matici)"]
+                 ["Razdelka" "2 × 40,5 cm"]
+                 ["Drsna vrata" "4 kosi, 41,4 × 35,4 cm, luknja za prst Ø 30 mm"]
+                 ["Spoji" "utor 3 mm in prehodni čepi 35 mm, epoksi + silica"]
+                 ["Ograjica" "snemljiva, 38,4 × 12 cm, visi na 2 vijakih M5"]]
+
+ :izvedbe {:cela [{:id "antracit" :ime "Antracit HPL" :cena 0 :barva "#33373b"}
+                  {:id "karbon" :ime "Karbonski videz" :cena 180 :barva "#1c1d1f"}
+                  {:id "topol" :ime "Naravni topol, lak" :cena -80 :barva "#d8b98a"}]
+           :pult [{:id "svetel" :ime "HPL svetlo siv" :cena 0 :barva "#d4d6d3"}
+                  {:id "temen" :ime "HPL antracit" :cena 0 :barva "#3d4145"}
+                  {:id "hrast" :ime "HPL hrastov dekor" :cena 60 :barva "#b88a57"}]
+           :dodatki [{:id "vodila" :ime "Vodili Vevor 100 cm z okovjem" :cena 140 :privzeto true}
+                     {:id "ograjica" :ime "Snemljiva ograjica zadaj" :cena 45 :privzeto true}
+                     {:id "zaboj" :ime "Zaboj za hrano po meri" :cena 55 :privzeto false}
+                     {:id "indukcija" :ime "2 prenosni indukciji" :cena 160 :privzeto false}
+                     {:id "montaza" :ime "Montaža v vaš T7" :cena 120 :privzeto false}]}}

@@ -1,0 +1,18 @@
+# Ustvari bb build
+public/data/izdelek.json
+public/slike/slike.json
+
+# Podatki med izvajanjem (osebni podatki strank!)
+storage/*
+!storage/.gitkeep
+
+# Orodja
+.cpcache/
+.clj-kondo/.cache/
+.lsp/
+.calva/
+.idea/
+.vscode/
+*.log
+.DS_Store
+Thumbs.db

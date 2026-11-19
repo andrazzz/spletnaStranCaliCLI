@@ -1,0 +1,7 @@
+{
+  "name": "kuhinja-cali-frontend",
+  "private": true,
+  "type": "module",
+  "description": "Brez odvisnosti. Ta datoteka samo pove Node.js, da so datoteke v public/js ES moduli (za bb check-js).",
+  "engines": { "node": ">=20" }
+}

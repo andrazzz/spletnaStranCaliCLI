@@ -1,0 +1,35 @@
+{:paths ["src" "resources"]
+
+ :tasks
+ {:requires ([babashka.fs :as fs]
+             [babashka.process :as p])
+
+  serve
+  {:doc  "Zaženi strežnik na http://localhost:8080 (PORT, HOST)"
+   ;; bb se zažene znova z -Djava.net.preferIPv4Stack=true: brez tega odpre IPv6 vtičnico
+   ;; [::ffff:127.0.0.1], ki je WSL ne posreduje v Windows (localhost:8080 v Windows ne deluje).
+   ;; Nastavitev je treba podati ob zagonu, System/setProperty med izvajanjem ne učinkuje.
+   :task (let [bb (if (fs/exists? "/proc/self/exe") (str (fs/real-path "/proc/self/exe")) "bb")]
+           (p/exec bb "-Djava.net.preferIPv4Stack=true" "-m" "kuhinja.server"))}
+
+  build
+  {:doc  "Izvozi resources/izdelek.edn v public/data/izdelek.json in seznam slik"
+   :task (exec 'kuhinja.build/-main)}
+
+  test
+  {:doc         "Poženi teste (clojure.test)"
+   :extra-paths ["test"]
+   :requires    ([clojure.test :as t]
+                 [kuhinja.povprasevanja-test]
+                 [kuhinja.server-test])
+   :task        (let [{:keys [fail error]} (t/run-tests 'kuhinja.povprasevanja-test 'kuhinja.server-test)]
+                  (when (pos? (+ fail error)) (System/exit 1)))}
+
+  check-js
+  {:doc  "Preveri sintakso JavaScript modulov (potrebuje Node.js)"
+   :task (doseq [f (map str (fs/glob "public/js" "**.js"))]
+           (p/shell "node" "--check" f))}
+
+  ci
+  {:doc     "Vse preverbe, kot jih poganja GitHub Actions"
+   :depends [test build check-js]}}}

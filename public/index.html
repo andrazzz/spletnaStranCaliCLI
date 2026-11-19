@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kuhinja Cali – izvlečna kuhinja za VW California T7</title>
+<meta name="description" content="Izvlečna kuhinja iz topolove vezane plošče za VW California T7: dve indukciji, drsna vrata, predala, preklopna polička.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="vrh">
+  <a class="znak" href="#">Kuhinja <em>Cali</em></a>
+  <nav>
+    <a href="#prikaz">Kako deluje</a>
+    <a href="#lastnosti">Lastnosti</a>
+    <a href="#mere">Mere</a>
+    <a href="#galerija">Galerija</a>
+    <a class="gumb majhen" href="#narocilo">Povpraševanje</a>
+  </nav>
+</header>
+
+<main>
+  <section class="uvod ovoj">
+    <p class="nadnaslov">VW California T7 · pod posteljo</p>
+    <h1 data-polje="ime">Izvlečna kuhinja Cali</h1>
+    <p class="vodilo" data-polje="opis">Lahka kuhinja iz topolove vezane plošče, ki se v celoti izvleče pod posteljo skozi zadnja vrata.</p>
+    <div class="dejanja">
+      <a class="gumb" href="#narocilo">Sestavite svojo · od <span data-polje="cena-od">1.890 €</span></a>
+      <a class="gumb obroba" href="#prikaz">Poglejte, kako deluje</a>
+    </div>
+    <ul class="hitre" id="hitre-mere"></ul>
+  </section>
+
+  <section id="prikaz" class="prikaz">
+    <div class="ovoj">
+      <div class="glava-razdelka">
+        <h2>Kako deluje</h2>
+        <p>Pogled od strani, v merilu po modelu v7. Kliknite na drsna vrata ali uporabite gumbe.</p>
+      </div>
+      <div class="oder">
+        <svg id="scena" viewBox="-52 -14 222 80" role="img" aria-label="Stranski pogled na kuhinjo pod posteljo"></svg>
+      </div>
+      <div class="krmilo" role="group" aria-label="Upravljanje prikaza">
+        <button type="button" data-ukaz="izvleci" aria-pressed="false">Izvleci kuhinjo</button>
+        <button type="button" data-ukaz="polica" aria-pressed="false">Odpri poličko</button>
+        <button type="button" data-ukaz="zadaj" aria-pressed="false">Odpri zadnji razdelek</button>
+        <button type="button" data-ukaz="spredaj" aria-pressed="false">Odpri sprednji razdelek</button>
+        <button type="button" data-ukaz="mere" aria-pressed="false">Pokaži mere</button>
+      </div>
+      <ul class="razdelki" id="razdelki"></ul>
+    </div>
+  </section>
+
+  <section id="lastnosti" class="ovoj">
+    <div class="glava-razdelka">
+      <h2>Zakaj takšna</h2>
+    </div>
+    <div class="mreza-lastnosti" id="lastnosti-seznam"></div>
+  </section>
+
+  <section id="mere" class="ovoj">
+    <div class="glava-razdelka">
+      <h2>Mere in material</h2>
+    </div>
+    <div class="tabela-ovoj">
+      <table class="specifikacije"><tbody id="specifikacije"></tbody></table>
+    </div>
+  </section>
+
+  <section id="galerija" class="ovoj">
+    <div class="glava-razdelka">
+      <h2>Galerija</h2>
+      <p id="galerija-opomba"></p>
+    </div>
+    <div class="galerija" id="galerija-mreza"></div>
+  </section>
+
+  <section id="narocilo" class="narocilo">
+    <div class="ovoj dvostolpno">
+      <div>
+        <div class="glava-razdelka">
+          <h2>Sestavite svojo</h2>
+          <p>Izberite izvedbo in dodatke. Cene so testne.</p>
+        </div>
+        <form id="konfigurator" class="konfigurator">
+          <fieldset>
+            <legend>Čela in vrata</legend>
+            <div class="izbire" id="izbira-celo"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Pult</legend>
+            <div class="izbire" id="izbira-pult"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Dodatki</legend>
+            <div class="dodatki" id="izbira-dodatki"></div>
+          </fieldset>
+        </form>
+      </div>
+
+      <aside class="povzetek">
+        <div class="cena-blok">
+          <span>Skupaj</span>
+          <strong id="skupaj">1.890 €</strong>
+          <small>z DDV, testna cena</small>
+        </div>
+        <ul id="povzetek-seznam" class="povzetek-seznam"></ul>
+
+        <form id="povprasevanje" class="povprasevanje" novalidate>
+          <label>Ime in priimek
+            <input name="ime" autocomplete="name" required>
+            <span class="napaka" data-za="ime"></span>
+          </label>
+          <label>E-pošta
+            <input name="email" type="email" autocomplete="email" required>
+            <span class="napaka" data-za="email"></span>
+          </label>
+          <label>Telefon <span class="neobvezno">(neobvezno)</span>
+            <input name="telefon" type="tel" autocomplete="tel">
+          </label>
+          <label>Sporočilo <span class="neobvezno">(neobvezno)</span>
+            <textarea name="sporocilo" rows="3" placeholder="Letnik avta, rok, posebne želje …"></textarea>
+          </label>
+          <button class="gumb polno" type="submit">Pošlji povpraševanje</button>
+          <p class="stanje" id="stanje" role="status" aria-live="polite"></p>
+        </form>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="noga ovoj">
+  <p>Kuhinja Cali · testna stran. Mere so iz modela »Californija kuhinja v7«, cene so samo za preizkus.</p>
+  <p>VW in California sta blagovni znamki Volkswagen AG; ta izdelek ni povezan z Volkswagnom.</p>
+</footer>
+
+<div class="povecava" id="povecava" hidden>
+  <button type="button" class="zapri" aria-label="Zapri">×</button>
+  <img alt="">
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
