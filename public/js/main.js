@@ -34,8 +34,11 @@ function povezDogodke() {
 }
 
 async function zagon() {
-  const izdelek = await naloziJson(naStrezniku ? ["/api/izdelek", "data/izdelek.json"] : ["data/izdelek.json"]);
+  // Z zaledjem (bb serve) odgovori /api/izdelek; statična različica (GitHub Pages) ima samo data/izdelek.json.
+  const izApi = naStrezniku ? await naloziJson(["/api/izdelek"]) : null;
+  const izdelek = izApi ?? (await naloziJson(["data/izdelek.json"]));
   if (!izdelek) return pokaziNapako();
+  const zZaledjem = Boolean(izApi);
 
   izpolniVsebino(izdelek);
   await postaviGalerijo();
@@ -44,7 +47,7 @@ async function zagon() {
     osveziRisbe(barve, ograjica);
   });
   postaviPovecavo();
-  postaviObrazec(trenutnaIzbira);
+  postaviObrazec(trenutnaIzbira, zZaledjem);
   obSpremembiStanja(osveziKrmilo);
   povezDogodke();
 

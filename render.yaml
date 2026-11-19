@@ -1,0 +1,12 @@
+# Render Blueprint: Dashboard → New → Blueprint → izberite ta repozitorij.
+# Brezplačni paket: zaspi po 15 min brez obiska, datotečni sistem NI trajen
+# (povpraševanja v storage/ se ob ponovnem zagonu izgubijo; vidna so v dnevniku »Logs«).
+services:
+  - type: web
+    name: kuhinja-cali
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/izdelek
+    envVars:
+      - key: HOST
+        value: 0.0.0.0

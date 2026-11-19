@@ -1,0 +1,27 @@
+# systemd storitev za VPS. Namestitev: docs/namestitev.md, razdelek »VPS«.
+#   sudo cp deploy/kuhinja-cali.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now kuhinja-cali
+[Unit]
+Description=Kuhinja Cali (bb serve)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=kuhinja
+Group=kuhinja
+WorkingDirectory=/opt/kuhinja-cali
+Environment=PORT=8080 HOST=127.0.0.1
+ExecStartPre=/usr/local/bin/bb build
+ExecStart=/usr/local/bin/bb serve
+Restart=on-failure
+RestartSec=3
+
+# Zaščita: storitev lahko piše samo tja, kjer mora.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/kuhinja-cali/storage /opt/kuhinja-cali/public/data /opt/kuhinja-cali/public/slike
+
+[Install]
+WantedBy=multi-user.target

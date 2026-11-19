@@ -1,0 +1,43 @@
+# Statični predogled na GitHub Pages: https://<uporabnik>.github.io/<repozitorij>/
+# Pred prvo objavo: Settings → Pages → Build and deployment → Source: »GitHub Actions«.
+# Dokler Pages ni vklopljen, se ob pushu ta posel preskoči (ne pade).
+name: GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  objava:
+    if: github.event_name == 'workflow_dispatch' || github.event.repository.has_pages
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.objava.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Namesti Babashko
+        run: curl -sL https://raw.githubusercontent.com/babashka/babashka/master/install | sudo bash
+
+      - name: Izvozi podatke (public/data/izdelek.json, public/slike/slike.json)
+        run: bb build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - id: objava
+        uses: actions/deploy-pages@v4

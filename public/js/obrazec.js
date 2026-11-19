@@ -3,8 +3,11 @@ import { $, $$, evri, naStrezniku } from "./pomozne.js";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-/** @param {() => object} trenutnaIzbira vrne izbiro iz konfiguratorja */
-export function postaviObrazec(trenutnaIzbira) {
+/**
+ * @param {() => object} trenutnaIzbira vrne izbiro iz konfiguratorja
+ * @param {boolean} zZaledjem ali teče Clojure strežnik (sicer statična različica, npr. GitHub Pages)
+ */
+export function postaviObrazec(trenutnaIzbira, zZaledjem) {
   const f = $("#povprasevanje");
   const stanjeEl = $("#stanje");
   const gumb = $("button[type=submit]", f);
@@ -30,6 +33,9 @@ export function postaviObrazec(trenutnaIzbira) {
 
     if (!naStrezniku) {
       return sporoci("Stran je odprta kot datoteka, zato povpraševanje ni bilo poslano. Zaženite strežnik z ukazom »bb serve«.", "slabo");
+    }
+    if (!zZaledjem) {
+      return sporoci("To je predogled brez strežnika, zato povpraševanje ni bilo poslano. Na polni različici strani se shrani.", "slabo");
     }
 
     gumb.disabled = true;

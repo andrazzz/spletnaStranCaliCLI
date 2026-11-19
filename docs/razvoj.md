@@ -60,13 +60,16 @@ Nov test: dodajte imenski prostor v `test/kuhinja/` ter ga vpišite v `:requires
 
 ## Stalna integracija
 
-`.github/workflows/ci.yml` ob vsakem pushu na `main` in ob pull requestu namesti Babashko in Node.js ter požene `bb ci`.
+`.github/workflows/ci.yml` ob vsakem pushu na `main` in ob pull requestu:
+
+- namesti Babashko in Node.js ter požene `bb ci`,
+- zgradi Docker sliko, jo zažene in preveri stran, API in povpraševanje.
+
+`.github/workflows/pages.yml` objavi statično različico na GitHub Pages (ko je Pages vklopljen).
 
 ## Objava
 
-**Statično** (GitHub Pages, Netlify, Cloudflare Pages): poženite `bb build`, objavite mapo `public/`. Stran deluje, obrazec pa pove, da povpraševanje ni bilo poslano. Za delujoč obrazec potrebuje stran strežnik.
-
-**Z zaledjem** (VPS, Fly.io, Render): poženite `bb serve` z `HOST=0.0.0.0` za obratnim posrednikom (Caddy, nginx) s HTTPS. Mapa `storage/` mora biti trajna.
+Glej [namestitev.md](namestitev.md): GitHub Pages, Render, Docker in VPS.
 
 ## Fotografije
 

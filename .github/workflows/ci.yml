@@ -23,3 +23,28 @@ jobs:
 
       - name: Testi, izvoz podatkov in preverba JS
         run: bb ci
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Zgradi sliko
+        run: docker build -t kuhinja-cali .
+
+      - name: Zaženi in preveri, da strežnik odgovori
+        run: |
+          docker run -d --name kuhinja -p 8080:8080 kuhinja-cali
+          for i in $(seq 30); do
+            curl -sf http://localhost:8080/api/izdelek > /dev/null && break
+            sleep 1
+          done
+          curl -sf http://localhost:8080/ | grep -q "Kuhinja"
+          curl -sf -X POST http://localhost:8080/api/povprasevanje \
+            -H 'Content-Type: application/json' \
+            -d '{"ime":"CI","email":"ci@primer.si","izbira":{"celo":"antracit","pult":"svetel","dodatki":[]}}' \
+            | grep -q '"ok":true'
+
+      - name: Dnevnik zabojnika ob napaki
+        if: failure()
+        run: docker logs kuhinja

@@ -1,0 +1,8 @@
+.git
+.github
+docs
+test
+storage
+public/data/izdelek.json
+public/slike/slike.json
+*.md

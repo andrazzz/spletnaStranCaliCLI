@@ -33,6 +33,10 @@ bb serve      # http://localhost:8080
 | `bb check-js` | preveri sintakso JS modulov (Node.js) |
 | `bb ci` | vse zgoraj, kot na GitHub Actions |
 
+## Predogled
+
+Statični predogled (brez obrazca) na GitHub Pages: **https://andrazzz.github.io/spletnaStranCaliCLI/** (ko je Pages vklopljen, glej [namestitev](docs/namestitev.md#2-github-pages-statični-predogled-brezplačno)).
+
 ## Struktura
 
 ```
@@ -66,7 +70,12 @@ bb serve      # http://localhost:8080
 │   └── slike/                 fotografije za galerijo
 ├── storage/                   povpraševanja (ni v gitu)
 ├── docs/                      dokumentacija
-└── .github/workflows/ci.yml
+├── deploy/                    Caddyfile in systemd storitev za VPS
+├── Dockerfile                 zabojnik s strežnikom
+├── render.yaml                Render Blueprint
+└── .github/workflows/
+    ├── ci.yml                 testi in preizkus Docker slike
+    └── pages.yml              statični predogled na GitHub Pages
 ```
 
 ## Dokumentacija
@@ -77,4 +86,5 @@ bb serve      # http://localhost:8080
 | [docs/api.md](docs/api.md) | HTTP API s primeri |
 | [docs/podatki.md](docs/podatki.md) | oblika `izdelek.edn` in zapisa povpraševanja |
 | [docs/spletni-del.md](docs/spletni-del.md) | JS moduli, koordinate risb, dodajanje vsebine |
-| [docs/razvoj.md](docs/razvoj.md) | razvojno okolje, WSL, testi, CI, objava |
+| [docs/namestitev.md](docs/namestitev.md) | **namestitev in objava**: GitHub Pages, Render, Docker, VPS, brezplačna gostovanja |
+| [docs/razvoj.md](docs/razvoj.md) | razvojno okolje, WSL, testi, CI |
